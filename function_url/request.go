@@ -13,9 +13,10 @@ func NewRequest(in events.LambdaFunctionURLRequest) *http.Request {
 	u := url.URL{
 		Scheme:   inHttp.Protocol,
 		Host:     in.RequestContext.DomainName,
-		RawPath:  in.RawPath,
+		Path:     in.RawPath,
 		RawQuery: in.RawQueryString,
 	}
+	u.RawPath = u.EscapedPath()
 	req := &http.Request{
 		Method:     inHttp.Method,
 		URL:        &u,
