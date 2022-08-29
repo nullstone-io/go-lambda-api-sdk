@@ -11,7 +11,7 @@ import (
 func NewRequest(in events.LambdaFunctionURLRequest) *http.Request {
 	inHttp := in.RequestContext.HTTP
 	u := url.URL{
-		Scheme:   inHttp.Protocol,
+		Scheme:   "https", // Lambda Function URLs always use https
 		Host:     in.RequestContext.DomainName,
 		Path:     in.RawPath,
 		RawQuery: in.RawQueryString,
